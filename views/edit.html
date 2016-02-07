@@ -1,0 +1,122 @@
+<div class="container-full">
+	<div class="container">
+		<div class="col-lg-12 text-center v-center">
+			<h1>Address Book</h1>
+			<p class="lead">You have {{contacts.length}} contacts</p>
+		</div>
+		<div class="row btn-row">
+			<div class="col-xs-12 btn-col">
+				<div class="input-group button-bar">
+					<a class="btn btn-lg btn-block" data-ng-href="#/list">Back To Contacts</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<form name="editForm" class="form-horizontal" data-ng-submit="saveContact()">
+			<div class="col-md-6">
+				<div class="panel panel-default new-contact">
+					<div class="panel-body" data-ng-class="{error: editForm.firstName.$invalid}">
+						<label for="firstName" class="col-sm-2 control-label">Name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="firstName" id="firstName" placeholder="Name" data-ng-model="contact.firstName" required>
+							<p data-ng-show="editForm.firstName.$error.required">* Required.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default new-contact">
+					<div class="panel-body" data-ng-class="{error: editForm.lastName.$invalid}">
+						<label for="lastName" class="col-sm-2 control-label">Surname</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="lastName" id="lastName" placeholder="Surname" data-ng-model="contact.lastName" required>
+							<p data-ng-show="editForm.lastName.$error.required">* Required.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default new-contact">
+					<div class="panel-body" data-ng-class="{error: editForm.email.$invalid}">
+						<label for="email" class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="email" id="email" placeholder="Email" data-ng-model="contact.email" data-ng-pattern="validEmail" required>
+							<p data-ng-show="editForm.email.$error.required">* Required.</p>
+							<p class="text-danger" data-ng-show="editForm.email.$error.pattern">Email is invalid.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default new-contact">
+					<div class="panel-body" data-ng-class="{error: editForm.phone.$invalid}">
+						<label for="phone" class="col-sm-2 control-label">Phone</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" data-ng-model="contact.phone" data-ng-maxlength="20" data-ng-pattern="validPhone">
+							<p>&nbsp;
+							<span class="text-danger" data-ng-show="editForm.phone.$error.maxlength">Phone number should not exceed 20 digits.</span>
+							<span class="text-danger" data-ng-show="editForm.phone.$error.pattern">Phone number is not valid.</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default new-contact">
+					<div class="panel-body" data-ng-class="{error: editForm.address.$invalid}">
+						<label for="address" class="col-sm-2 control-label">Address</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="address" id="address" placeholder="Address" data-ng-model="contact.address">
+							<p>&nbsp;</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default new-contact">
+					<div class="panel-body" data-ng-class="{error: editForm.city.$invalid}">
+						<label for="city" class="col-sm-2 control-label">City</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="city" id="city" placeholder="City" data-ng-model="contact.city">
+							<p>&nbsp;</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default new-contact">
+					<div class="panel-body" data-ng-class="{error: editForm.zipCode.$invalid}">
+						<label for="zipCode" class="col-sm-2 control-label">Zip Code</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="zipCode" id="zipCode" placeholder="Zip Code" data-ng-model="contact.zipCode" data-ng-pattern="validZip">
+							<p>&nbsp;<span class="text-danger" data-ng-show="editForm.zipCode.$error.pattern">Zip Code is not valid.</span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default new-contact">
+					<div class="panel-body" data-ng-class="{error: editForm.country.$invalid}">
+						<label for="country" class="col-sm-2 control-label">Country</label>
+						<div class="col-sm-10">
+							<select class="form-control" name="country" id="country" placeholder="Country" data-ng-model="contact.country">
+								<option ng:repeat="countryName in countries" value="{{countryName.name}}">{{countryName.name}}</option>
+							</select>
+							<p>&nbsp;</p>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<a class="btn btn-lg btn-block" data-ng-click="saveContact()" data-ng-disabled="editForm.$invalid">Save</a>
+		</div>
+		<div class="col-md-6">
+			<a class="btn btn-lg btn-block" data-ng-click="deleteContact()">Delete</a>
+		</div>
+	</form>
+</div>

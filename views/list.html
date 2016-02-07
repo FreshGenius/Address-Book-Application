@@ -1,0 +1,52 @@
+<div class="container-full">
+	<div class="container">
+		<div class="col-lg-12 text-center v-center">
+			<h1>Address Book</h1>
+			<p class="lead">You have {{contacts.length}} contacts</p>
+		</div>
+		<div class="row btn-row">
+			<div class="col-md-4 btn-col">
+				<a class="btn btn-lg btn-block" data-ng-href="#/edit">New Contact</a>
+			</div>
+			<div class="col-md-4 col-md-push-4 btn-col">
+				<div class="xtr-btn-col">
+					<div class="col-sm-6 button-holder">
+						<!-- This is a (dirty hack) way of styling a file input button -->
+						<input id="importFile" type="file" style="display:none;" onchange="document.getElementById('file').value=this.value.substring(this.value.lastIndexOf('\\')+1);" on-read-file="importFile($fileContent)">
+						<button class="btn btn-lg btn-block" onclick="document.getElementById('importFile').click();">Import</button>
+					</div>
+					<div class="col-sm-6 button-holder">
+						<a class="btn btn-lg btn-block" download="ContactsBackup.json" data-ng-href="{{ contactsBackup }}">Export</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-md-pull-4 btn-col">
+				<div class="input-group search-bar">
+					<input class="form-control input-lg" title="" placeholder="Filter Contacts" type="text" data-ng-model="search">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="col-md-4 col-sm-6" data-ng-repeat="contact in contacts | filter:search | orderBy:'fullName' track by $index">
+		<div class="panel panel-default contact-data">
+			<div class="panel-heading">
+				<h3><strong>{{contact.firstName}} {{contact.lastName}}</strong></h3>
+			</div>
+			<div class="panel-body">
+				<div class="data-hold-full">
+					<div class="data-hold">
+						<p><strong>Email:</strong> {{contact.email}}</p>
+						<p><strong>Phone:</strong> {{contact.phone}}</p>
+						<p><strong>Address:</strong> {{contact.address}}</p>
+						<p><strong>City:</strong> {{contact.city}}</p>
+						<p><strong>Zip Code:</strong> {{contact.zipCode}}</p>
+						<p><strong>Country:</strong> {{contact.country}}</p>
+					</div>
+				</div>
+				<span class="pull-right"><a class="btn btn-sm btn-block" data-ng-href="#/edit/{{contact.index}}">Edit</a></span>
+			</div>
+		</div>
+	</div>
+</div>

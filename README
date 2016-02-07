@@ -1,0 +1,11 @@
+Address Book Application (AngularJS)
+
+- FUNCTIONS -
+Add - Edit - Delete - Import - Export
+(Saves data to local storage with backup capability)
+
+- To Do - 
+Encryption with something like Cryptico:
+github.com/wwwtyro/cryptico
+
+Demo at: addressbook.freshgenius.com
